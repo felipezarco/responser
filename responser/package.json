@@ -1,0 +1,19 @@
+{
+  "name": "responser",
+  "version": "1.0.0",
+  "description": "Response HTTP standard",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Luiz Felipe Zarco <felipezarco@hotmail.com> (https://gitlab.com/felipezarco)",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "express": "^4.17.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.9.2"
+  }
+}
