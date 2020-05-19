@@ -7,13 +7,29 @@
   "scripts": {
     "build": "tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "responser",
+    "response",
+    "res",
+    "rest",
+    "api",
+    "json",
+    "http",
+    "status",
+    "codes",
+    "send",
+    "express",
+    "data",
+    "content",
+    "payload"
+  ],
   "author": "Luiz Felipe Zarco <felipezarco@hotmail.com> (https://gitlab.com/felipezarco)",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/felipezarco/responser.git"
   },  
+  
   "dependencies": {
     "@types/express": "^4.17.6",
     "express": "^4.17.1",
