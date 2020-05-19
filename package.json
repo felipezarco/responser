@@ -1,5 +1,5 @@
 {
-  "name": "responser",
+  "name": "@felipezarco/responser",
   "version": "1.0.8",
   "description": "Response HTTP standard",
   "main": "dist/index.js",
