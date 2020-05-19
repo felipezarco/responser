@@ -1,17 +1,13 @@
-## responser
+## Responser
 
 As an api programmer you should not need to always be concerned about the status code and the data type of your responses.
-Responser will give you all http status codes and send them in a JSON.
+Responser will give a simple way of chosing from all HTTP status codes availables for you to respond in a REST API.
 
 #### Install:
 
-Use your favorite package manager to install.
+Use your favorite package manager to install. For instance: `yarn add responser`
 
-```javascript
-yarn add responser
-```
-
-Then import it.
+Then import it:
 
 ```javascript
 import responser from 'responser'
@@ -23,25 +19,45 @@ Or, for commonjs:
 const responser = require('responser')
 ```
 
-#### Add it to your express middlewares:
+Add responser as an express middleware:
 
 ```javascript
 app.use(responser)
 ```
 
+And you're good to go!
+
 #### Usage:
 
-Since, responser overwrites Express' interface with the send_* methods. Now you can call responser methods using the response parameter in one of your middlewares or controllers. The methods accept two parameters: message as a string and data as an object.
+Since, responser overwrites Express' interface with the send_* methods. Now you can call responser methods using the response parameter in one of your middlewares or controllers. 
 
-Consider the code as inside of a middleware with local res variable:
+The methods accept two parameters: 
+
+* message (string) 
+* data (object)
+
+Consider the following code which has the response local variable:
 
 ```javascript
 
-const products = ['notebook', 'keyboard']
+import { Request, Response } from 'express'
 
-return res.send_ok('Products were successfully found!', {
-  products
+class PlanetController {
+
+  async index(request: Request, response: Response) {
+
+    const planets = [ 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune' ]
+
+    return response.send_ok('Planets were found successfully!', {
+      planets
+    })
+
+  }
+
+
 }
+
+export default new PlanetController()
 ```
 
 The following code generates the response:
@@ -54,20 +70,28 @@ Content-Type: application/json; charset=utf-8
 {
   "code": 200,
   "status": "OK",
-  "message": "Products were successfully found!",
+  "message": "Planets were found successfully!",
   "success": true,
   "data": {
-    "products": [
-      "notebook", 
-      "keyboard"
-    ]
+    "planets": [
+       "Mercury", 
+       "Venus",
+       "Earth",
+       "Mars",
+       "Jupiter",
+       "Saturn",
+       "Uranus",
+       "Neptune"
+     ]
   }
 }
 ```
 
-The following methods are currently available:
+With typescript, you can easily access all methods:
 
-Responser Method, code and status.
+![vscode suggestions](https://raw.githubusercontent.com/felipezarco/files/master/images/screenshots/responser.png "Responser typescript methods suggestion")
+
+The following methods are currently available (method, code and status):
 
 ```javascript
 send_accepted                      202 ACCEPTED 
