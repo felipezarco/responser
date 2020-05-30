@@ -73,7 +73,7 @@ const responser = (request: Request, response: Response, next: NextFunction) => 
         code,
         success: String(code).charAt(0) === '2',
         message, 
-        data: { ...content }
+        data: content ? { ...content } : undefined
       })
     }
   }  
