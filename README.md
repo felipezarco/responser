@@ -150,4 +150,6 @@ send_unsupportedMediaType          415 UNSUPPORTED_MEDIA_TYPE
 send_useProxy                      305 USE_PROXY 
 ```
 
+License MIT @ Felipe Zarco
+
 
