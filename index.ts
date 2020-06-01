@@ -62,6 +62,8 @@ declare global {
   }
 }
 
+const isObjectEmpty = (obj: object) => Object.keys(obj).length === 0
+
 const camelCase = (str: string) => str.toLowerCase().replace(/(\_\w)/g, c => c[1].toUpperCase())
 
 const responser = (request: Request, response: Response, next: NextFunction) => {
@@ -73,7 +75,7 @@ const responser = (request: Request, response: Response, next: NextFunction) => 
         code,
         success: String(code).charAt(0) === '2',
         message, 
-        data: content ? { ...content } : undefined
+        data: isObjectEmpty({ ...content }) ? { ...content } : undefined
       })
     }
   }  
