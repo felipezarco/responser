@@ -70,16 +70,16 @@ const responser = (request: Request, response: Response, next: NextFunction) => 
   for(const [status, code] of Object.entries(HttpStatus)) {
     if(status == 'getStatusText' || status == 'getStatusCode') continue
     (response as any)['send_'+camelCase(status)] = function(message: string, content?: object) {
-      this.status(code).json({ 
-        status, 
+      this.status(code).json({
+        status,
         code,
         success: String(code).charAt(0) === '2',
-        message, 
+        message,
         data: content ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined
       })
     }
-  }  
+  }
   next()
-} 
+}
 
 export default responser
