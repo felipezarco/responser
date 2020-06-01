@@ -75,7 +75,7 @@ const responser = (request: Request, response: Response, next: NextFunction) => 
         code,
         success: String(code).charAt(0) === '2',
         message, 
-        data: isObjectEmpty({ ...content }) ? undefined : { ...content }
+        data: content ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined
       })
     }
   }  
