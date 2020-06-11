@@ -42,8 +42,8 @@ And you're good to go!
 
 Since responser overwrites Express' interface, you can find the responser send_* methods directly in the express response. Methods accept two parameters: 
 
-* message (string) 
-* data (object)
+* Required: message (string)
+* Optional: data (object | undefiend)
 
 Consider the following code which has the response local variable:
 
@@ -91,6 +91,17 @@ Content-Type: application/json; charset=utf-8
   }
 }
 ```
+
+Where,
+
+`code` is a number HTTP Status Code;
+
+`status` is a string with the name of the HTTP Status;
+
+`success` is a boolean which is true for 1XX and 2XX HTTP Status Codes;
+
+`data` is an object with the payload or undefined if nothing is given;
+
 
 With typescript, you can easily access all methods:
 
