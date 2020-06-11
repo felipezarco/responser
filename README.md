@@ -1,11 +1,18 @@
 ## Responser
 
-As an api programmer you should not need to always be concerned about the status code and the data type of your responses.
-Responser will give a simple way of chosing from all HTTP status codes availables for you to respond in a REST API.
+While developing an API a programmer should not always need to be concerned about the status code and the data type of your responses.
+
+Responser gives you a simple way of returning the base format of the responses with all HTTP status codes availables by their names.
+
+The npm module is available at: https://www.npmjs.com/package/responser
 
 #### Install:
 
-Use your favorite package manager to install. For instance: `yarn add responser`
+Use your favorite package manager to install. For instance: 
+
+```
+  yarn add responser
+```
 
 Then import it:
 
@@ -19,7 +26,7 @@ Or, for commonjs:
 const responser = require('responser')
 ```
 
-Add responser as an express middleware:
+Then you need to add responser as an express middleware:
 
 ```javascript
 app.use(responser)
@@ -29,9 +36,11 @@ And you're good to go!
 
 #### Usage:
 
-Since, responser overwrites Express' interface with the send_* methods. Now you can call responser methods using the response parameter in one of your middlewares or controllers. 
 
-The methods accept two parameters: 
+
+
+
+Since responser overwrites Express' interface, you can find the responser send_* methods directly in the express response. Methods accept two parameters: 
 
 * message (string) 
 * data (object)
@@ -39,7 +48,6 @@ The methods accept two parameters:
 Consider the following code which has the response local variable:
 
 ```javascript
-
 import { Request, Response } from 'express'
 
 class PlanetController {
@@ -51,16 +59,13 @@ class PlanetController {
     return response.send_ok('Planets were found successfully!', {
       planets
     })
-
   }
-
-
 }
 
 export default new PlanetController()
 ```
 
-The following code generates the response:
+The above code generates the following response:
 
 ```json
 HTTP/1.1 200 OK
@@ -92,7 +97,6 @@ With typescript, you can easily access all methods:
 ![vscode suggestions](https://raw.githubusercontent.com/felipezarco/files/master/images/screenshots/responser.png "Responser typescript methods suggestion")
 
 The following methods are currently available (method, code and status):
-
 ```javascript
 send_accepted                      202 ACCEPTED 
 send_badGateway                    502 BAD_GATEWAY 

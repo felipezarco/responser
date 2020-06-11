@@ -73,7 +73,7 @@ const responser = (request: Request, response: Response, next: NextFunction) => 
       this.status(code).json({
         status,
         code,
-        success: String(code).charAt(0) === '2',
+        success: ['1','2'].includes(String(code).charAt(0)),
         message,
         data: content ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined
       })
