@@ -1,10 +1,12 @@
 ## Responser
 
-While developing an API a programmer should not always need to be concerned about the status code and the data type of your responses.
+While developing an API a programmer should not always need to be concerned about the status code and the data type of your responses. Responser gives you a simple way of returning the base format of the responses using on of all HTTP status codes availables.
 
-Responser gives you a simple way of returning the base format of the responses with all HTTP status codes availables by their names.
+[![npm version](https://badge.fury.io/js/responser.svg)](https://badge.fury.io/js/responser)
 
-The npm module is available at: https://www.npmjs.com/package/responser
+[![npm](https://nodei.co/npm/responser.png)](https://www.npmjs.com/package/responser)
+
+
 
 #### Install:
 
