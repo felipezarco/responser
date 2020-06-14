@@ -1,12 +1,10 @@
 ## Responser
 
-While developing an API a programmer should not always need to be concerned about the status code and the data type of your responses. Responser gives you a simple way of returning the base format of the responses using on of all HTTP status codes availables.
+While creating an API, a programmer should not always need to be concerned about the status code and the data type of your responses. Responser gives you a simple way of returning an REST API base response for each one of the HTTP status codes availables.
 
 [![npm version](https://badge.fury.io/js/responser.svg)](https://badge.fury.io/js/responser)
 
 [![npm](https://nodei.co/npm/responser.png)](https://www.npmjs.com/package/responser)
-
-
 
 #### Install:
 
@@ -38,16 +36,12 @@ And you're good to go!
 
 #### Usage:
 
-
-
-
-
 Since responser overwrites Express' interface, you can find the responser send_* methods directly in the express response. Methods accept two parameters: 
 
 * Required: message (string)
 * Optional: data (object | undefiend)
 
-Consider the following code which has the response local variable:
+Consider the following code which has a `response` local variable (the name does not matter given its type is `Response`):
 
 ```javascript
 import { Request, Response } from 'express'
@@ -94,16 +88,15 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-Where,
+Where:
 
-`code` is a number HTTP Status Code;
+- `code` is a number HTTP Status Code;
 
-`status` is a string with the name of the HTTP Status;
+- `status` is a string with the name of the HTTP Status;
 
-`success` is a boolean which is true for 1XX and 2XX HTTP Status Codes;
+- `success` is a boolean which is true for 1XX and 2XX HTTP Status Codes;
 
-`data` is an object with the payload or undefined if nothing is given;
-
+- `data` is an object with the payload or undefined if none is given.
 
 With typescript, you can easily access all methods:
 
