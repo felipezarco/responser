@@ -69,13 +69,15 @@ const camelCase = (str: string) => str.toLowerCase().replace(/(\_\w)/g, c => c[1
 const responser = (request: Request, response: Response, next: NextFunction) => {
   for(const [status, code] of Object.entries(HttpStatus)) {
     if(status == 'getStatusText' || status == 'getStatusCode') continue
+    const success = ['1','2'].includes(String(code).charAt(0));
     (response as any)['send_'+camelCase(status)] = function(message: string, content?: object) {
       this.status(code).json({
         status,
         code,
-        success: ['1','2'].includes(String(code).charAt(0)),
+        success,
         message,
-        data: content ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined
+        data: content && success ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined,
+        errors: content && !success ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined,
       })
     }
   }
