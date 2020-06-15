@@ -1,6 +1,6 @@
 {
   "name": "responser",
-  "version": "1.0.16",
+  "version": "1.0.20",
   "description": "Response HTTP standard",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
