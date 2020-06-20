@@ -1,8 +1,9 @@
-## Responser
+# Responser
 
 While creating an API, a programmer should not always need to be concerned about the status code and the data type of your responses. Responser gives you a simple way of returning an REST API base response for each one of the HTTP status codes availables.
 
-[![npm version](https://badge.fury.io/js/responser.svg)](https://badge.fury.io/js/responser)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/responser.svg)](https://badge.fury.io/js/responser)
 
 [![npm](https://nodei.co/npm/responser.png)](https://www.npmjs.com/package/responser)
 
