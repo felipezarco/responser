@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1592691404231" clover="3.2.0">
+  <project timestamp="1592691404231" name="All files">
+    <metrics statements="12" coveredstatements="12" conditionals="14" coveredconditionals="14" methods="5" coveredmethods="5" elements="31" coveredelements="31" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
+    <file name="index.ts" path="/home/felipe/MEGA/code/packages/responser/index.ts">
+      <metrics statements="12" coveredstatements="12" conditionals="14" coveredconditionals="14" methods="5" coveredmethods="5"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="65" count="2" type="stmt"/>
+      <line num="67" count="192" type="stmt"/>
+      <line num="69" count="1" type="stmt"/>
+      <line num="70" count="168" type="stmt"/>
+      <line num="71" count="168" type="cond" truecount="4" falsecount="0"/>
+      <line num="72" count="162" type="stmt"/>
+      <line num="73" count="162" type="stmt"/>
+      <line num="74" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="75" count="3" type="stmt"/>
+      <line num="85" count="3" type="stmt"/>
+      <line num="88" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
