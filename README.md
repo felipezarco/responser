@@ -42,7 +42,7 @@ And you're good to go!
 Since responser overwrites Express' interface, you can find the responser send_* methods directly in the express response. Methods accept two parameters: 
 
 * Required: message (string)
-* Optional: data (object | undefiend)
+* Optional: data || errors (any | undefiend)
 
 Consider the following code which has a `response` local variable (the name does not matter given its type is `Response`):
 
@@ -91,6 +91,56 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
+An example of unsucessful response would be:
+
+```javascript
+import { Request, Response } from 'express'
+
+class PlanetController {
+
+  async post(request: Request, response: Response) {
+
+    const { planetName, planetSize } = request.body
+
+    let invalid = []
+
+    if(!planetName) invalid.push(
+      { name: 'planetName', message: 'The planet name was not given!' }
+    )
+
+    // ...
+
+    if(invalid.length) return response.send_badRequest(
+      'The request contains one or more errors!', {
+        invalid
+      }
+    )
+
+    // ...
+
+  }
+}
+
+export default new PlanetController()
+```
+
+Which outputs: 
+
+```javascript
+  {
+    status: 'BAD_REQUEST',
+    code: 400,
+    message: 'The request contains one or more errors!',
+    success: false,
+    errors: {
+      invalid: [
+        { name: 'planetName', message: 'The planet name was not given!' }
+      ]
+    }
+  }
+```
+
+
 Where:
 
 - `code` is a number HTTP Status Code;
@@ -99,7 +149,9 @@ Where:
 
 - `success` is a boolean which is true for 1XX and 2XX HTTP Status Codes;
 
-- `data` is an object with the payload or undefined if none is given.
+- `data` **or** `errors` is an object with the second argument. It is `undefined` if none is given.
+
+**Note**: `data` is the key name when `success` is `true` while `errors` is the key when `success` is `false`.
 
 With typescript, you can easily access all methods:
 
