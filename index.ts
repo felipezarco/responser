@@ -71,13 +71,14 @@ const responser = (request: Request, response: Response, next: NextFunction) => 
     if(status == 'getStatusText' || status == 'getStatusCode') continue
     const success = ['1','2'].includes(String(code).charAt(0));
     (response as any)['send_'+camelCase(status)] = function(message: string, content?: object) {
+      const hasContent = content && !isObjectEmpty(content) 
       this.status(code).json({
         status,
         code,
         success,
         message,
-        data: content && success ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined,
-        errors: content && !success ? isObjectEmpty({ ...content }) ? undefined : { ...content } : undefined,
+        data: hasContent && success ? content : undefined,
+        errors: hasContent && !success ? content : undefined,
       })
     }
   }
