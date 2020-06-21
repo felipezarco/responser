@@ -91,7 +91,7 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-An example of unsucessful response would be:
+An example of unsuccessful response would be:
 
 ```javascript
 import { Request, Response } from 'express'
