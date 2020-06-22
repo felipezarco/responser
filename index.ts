@@ -70,7 +70,7 @@ const responser = (request: Request, response: Response, next: NextFunction) => 
   for(const [status, code] of Object.entries(HttpStatus)) {
     if(status == 'getStatusText' || status == 'getStatusCode') continue
     const success = ['1','2'].includes(String(code).charAt(0));
-    (response as any)['send_'+camelCase(status)] = function(message: string, content?: object) {
+    (response as any)['send_'+camelCase(status)] = function(message: string, content?: any) {
       const hasContent = content && !isObjectEmpty(content) 
       this.status(code).json({
         status,
