@@ -6,7 +6,7 @@ While creating an API, a programmer should not always need to be concerned about
 
 [![npm](https://nodei.co/npm/responser.png)](https://www.npmjs.com/package/responser)
 
-#### Install:
+## Installation:
 
 The latest version is available at: https://www.npmjs.com/package/responser
 
@@ -36,7 +36,7 @@ app.use(responser)
 
 And you're good to go!
 
-#### Usage:
+## Usage:
 
 Since responser overwrites Express' interface, you can find the responser send_* methods directly in the express response. Methods accept two parameters: 
 
