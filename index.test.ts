@@ -1,7 +1,8 @@
-import responser from './index'
-import express from 'express'
+
+import express, { Response } from 'express'
+import responser from './source/index'
+
 import request from 'supertest'
-import { Response } from 'express'
 
 test('it returns the right response', async () => {
   
