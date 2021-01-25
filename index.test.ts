@@ -1,6 +1,6 @@
 
 import express, { Response } from 'express'
-import responser from './source/index'
+import responser from './index'
 
 import request from 'supertest'
 
