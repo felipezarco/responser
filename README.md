@@ -1,5 +1,6 @@
 # Responser
 
+<<<<<<< HEAD
 > A simple way to send standard HTTP responses in your Node/Express application.
 
 ![vscode suggestions](https://raw.githubusercontent.com/felipezarco/files/master/images/screenshots/responser.png "Responser typescript methods suggestion")
@@ -238,5 +239,10 @@ Thanks for your interest in contributing to this repo!
 [Luiz Felipe Zarco](https://github.com/felipezarco) (felipezarco@hotmail.com)
 
 ## License
+=======
+This package has moved permanently to: https://github.com/zarcobox/responser
+
+[![npm](https://nodei.co/npm/@zarcobox/responser.png)](https://www.npmjs.com/package/@zarcobox/responser)
+>>>>>>> 046c84c6adbdd23234c4e83e8e8875146aad7d31
 
 This code is licensed under the [MIT License](https://github.com/felipezarco/responser/blob/master/LICENSE.md). See the [LICENSE.md](https://github.com/felipezarco/responser/blob/master/LICENSE.md) file for more info.
