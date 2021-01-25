@@ -1,14 +1,20 @@
 {
   "name": "responser",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Responses HTTP standard for REST",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/index",
   "scripts": {
     "build": "tsc",
     "test": "jest",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
+  "files": [
+    "dist/index.d.ts",
+    "dist/index.js",
+    "README.md",
+    "LICENSE.md"
+  ],
   "keywords": [
     "responser",
     "response",
@@ -29,8 +35,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/felipezarco/responser"
+    "url": "git+https://github.com/felipezarco/responser.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/felipezarco/responser/issues"
+  },
+  "homepage": "https://github.com/felipezarco/responser#readme",
   "dependencies": {
     "http-status-codes": "^2.1.4"
   },
