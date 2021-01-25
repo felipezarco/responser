@@ -158,61 +158,61 @@ Where:
  With typescript, you can easily access all methods by typing `.send_` in your response variable. The following methods are currently available (method, code and status).
 
 ```javascript
-send_continue                      100	Continue
-send_switchingProtocols            101	Switching Protocols
-send_processing                    102	Processing
-send_ok                            200	OK
-send_created                       201	Created
-send_accepted                      202	Accepted
-send_nonAuthoritativeInformation   203	Non Authoritative Information
-send_noContent                     204	No Content
-send_resetContent                  205	Reset Content
-send_partialContent                206	Partial Content
-send_multiStatus                   207	Multi-Status
-send_multipleChoices               300	Multiple Choices
-send_movedPermanently              301	Moved Permanently
-send_movedTemporarily              302	Moved Temporarily
-send_seeOther                      303	See Other
-send_notModified                   304	Not Modified
-send_useProxy                      305	Use Proxy
-send_temporaryRedirect             307	Temporary Redirect
-send_permanentRedirect             308	Permanent Redirect
-send_badRequest                    400	Bad Request
-send_unauthorized                  401	Unauthorized
-send_paymentRequired               402	Payment Required
-send_forbidden                     403	Forbidden
-send_notFound                      404	Not Found
-send_methodNotAllowed              405	Method Not Allowed
-send_notAcceptable                 406	Not Acceptable
-send_proxyAuthenticationRequired   407	Proxy Authentication Required
-send_requestTimeout                408	Request Timeout
-send_conflict                      409	Conflict
-send_gone                          410	Gone
-send_lengthRequired                411	Length Required
-send_preconditionFailed            412	Precondition Failed
-send_requestTooLong                413	Request Entity Too Large
-send_requestUriTooLong             414	Request-URI Too Long
-send_unsupportedMediaType          415	Unsupported Media Type
-send_requestedRangeNotSatisfiable  416	Requested Range Not Satisfiable
-send_expectationFailed             417	Expectation Failed
-send_imATeapot                     418	I'm a teapot
-send_insufficientSpaceOnResource   419	Insufficient Space on Resource
-send_methodFailure                 420	Method Failure
-send_unprocessableEntity           422	Unprocessable Entity
-send_locked                        423	Locked
-send_failedDependency              424	Failed Dependency
-send_preconditionRequired          428	Precondition Required
-send_tooManyRequests               429	Too Many Requests
-send_requestHeaderFieldsTooLarge   431	Request Header Fields Too Large
-send_unavailableForLegalReasons    451	Unavailable For Legal Reasons
-send_internalServerError           500	Internal Server Error
-send_notImplemented                501	Not Implemented
-send_badGateway                    502	Bad Gateway
-send_serviceUnavailable            503	Service Unavailable
-send_gatewayTimeout                504	Gateway Timeout
-send_httpVersionNotSupported       505	HTTP Version Not Supported
-send_insufficientStorage           507	Insufficient Storage
-send_networkAuthenticationRequired 511	Network Authentication Required
+send_continue                      100 // Continue
+send_switchingProtocols            101 // Switching Protocols
+send_processing                    102 // Processing
+send_ok                            200 // OK
+send_created                       201 // Created
+send_accepted                      202 // Accepted
+send_nonAuthoritativeInformation   203 // Non Authoritative Information
+send_noContent                     204 // No Content
+send_resetContent                  205 // Reset Content
+send_partialContent                206 // Partial Content
+send_multiStatus                   207 // Multi-Status
+send_multipleChoices               300 // Multiple Choices
+send_movedPermanently              301 // Moved Permanently
+send_movedTemporarily              302 // Moved Temporarily
+send_seeOther                      303 // See Other
+send_notModified                   304 // Not Modified
+send_useProxy                      305 // Use Proxy
+send_temporaryRedirect             307 // Temporary Redirect
+send_permanentRedirect             308 // Permanent Redirect
+send_badRequest                    400 // Bad Request
+send_unauthorized                  401 // Unauthorized
+send_paymentRequired               402 // Payment Required
+send_forbidden                     403 // Forbidden
+send_notFound                      404 // Not Found
+send_methodNotAllowed              405 // Method Not Allowed
+send_notAcceptable                 406 // Not Acceptable
+send_proxyAuthenticationRequired   407 // Proxy Authentication Required
+send_requestTimeout                408 // Request Timeout
+send_conflict                      409 // Conflict
+send_gone                          410 // Gone
+send_lengthRequired                411 // Length Required
+send_preconditionFailed            412 // Precondition Failed
+send_requestTooLong                413 // Request Entity Too Large
+send_requestUriTooLong             414 // Request-URI Too Long
+send_unsupportedMediaType          415 // Unsupported Media Type
+send_requestedRangeNotSatisfiable  416 // Requested Range Not Satisfiable
+send_expectationFailed             417 // Expectation Failed
+send_imATeapot                     418 // I'm a teapot
+send_insufficientSpaceOnResource   419 // Insufficient Space on Resource
+send_methodFailure                 420 // Method Failure
+send_unprocessableEntity           422 // Unprocessable Entity
+send_locked                        423 // Locked
+send_failedDependency              424 // Failed Dependency
+send_preconditionRequired          428 // Precondition Required
+send_tooManyRequests               429 // Too Many Requests
+send_requestHeaderFieldsTooLarge   431 // Request Header Fields Too Large
+send_unavailableForLegalReasons    451 // Unavailable For Legal Reasons
+send_internalServerError           500 // Internal Server Error
+send_notImplemented                501 // Not Implemented
+send_badGateway                    502 // Bad Gateway
+send_serviceUnavailable            503 // Service Unavailable
+send_gatewayTimeout                504 // Gateway Timeout
+send_httpVersionNotSupported       505 // HTTP Version Not Supported
+send_insufficientStorage           507 // Insufficient Storage
+send_networkAuthenticationRequired 511 // Network Authentication Required
 ```
 
 ## Testing

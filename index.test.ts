@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 
 import express, { Response } from 'express'
 import responser from './index'
 
 import request from 'supertest'
-=======
-import responser from './index'
-import express from 'express'
-import request from 'supertest'
-import { Response } from 'express'
->>>>>>> 046c84c6adbdd23234c4e83e8e8875146aad7d31
 
 test('it returns the right response', async () => {
   
