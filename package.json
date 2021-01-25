@@ -1,6 +1,6 @@
 {
   "name": "responser",
-  "version": "2.1.3",
+  "version": "2.5.0",
   "description": "Responses HTTP standard for REST",
   "main": "index.js",
   "types": "index",
@@ -35,10 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/felipezarco/responser.git"
-  },
-  "publishConfig": {
-    "access": "public"
+    "url": "git://github.com/felipezarco/responser"
   },
   "bugs": {
     "url": "https://github.com/felipezarco/responser/issues"
