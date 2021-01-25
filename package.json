@@ -1,9 +1,9 @@
 {
   "name": "responser",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Responses HTTP standard for REST",
-  "main": "dist/index.js",
-  "types": "dist/index",
+  "main": "index.js",
+  "types": "index",
   "scripts": {
     "build": "tsc",
     "test": "jest",
