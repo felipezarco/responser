@@ -17,6 +17,6 @@
     "node_modules"
   ],
   "files": [
-    "source/index.ts"
+    "index.ts"
   ]
 }
