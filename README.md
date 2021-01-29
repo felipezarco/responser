@@ -4,7 +4,7 @@
 
 ![vscode suggestions](https://raw.githubusercontent.com/felipezarco/files/master/images/screenshots/responser.png "Responser typescript methods suggestion")
 
-While creating an API, a programmer should not always need to be concerned about the status code and the data type of your responses. Responser gives you a simple way of returning basic REST API responses for each one of the HTTP status codes availables.
+While creating an API, a programmer should not always need to be concerned about the status code and the data type of your responses. Responser gives you a simple way of returning basic REST API responses for each one of the HTTP status codes available.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/responser.svg)](https://badge.fury.io/js/felipezarco%2Fresponser) [![Build Status](https://travis-ci.org/felipezarco/responser.svg?branch=master)](https://travis-ci.org/felipezarco/responser) [![Coverage Status](https://coveralls.io/repos/github/felipezarco/responser/badge.svg?branch=master)](https://coveralls.io/github/felipezarco/responser?branch=master) ![Downloads](https://img.shields.io/npm/dw/responser)
 
