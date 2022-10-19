@@ -71,11 +71,12 @@ export default new PlanetController()
 
 The above code generates the following response:
 
-```json
+```
 HTTP/1.1 200 OK
 X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
-
+```
+```json
 {
   "code": 200,
   "status": "OK",
