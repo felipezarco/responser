@@ -4,159 +4,114 @@
 
 ![vscode suggestions](https://raw.githubusercontent.com/felipezarco/files/master/images/screenshots/responser.png "Responser typescript methods suggestion")
 
-While creating an API, a programmer should not always need to be concerned about the status code and the data type of your responses. Responser gives you a simple way of returning basic REST API responses for each one of the HTTP status codes available.
+While creating an API, a programmer should not always be concerned about the HTTP status code nor about the response format. Responser gives you a simple way of returning standard responses for each HTTP status available.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/responser.svg)](https://badge.fury.io/js/felipezarco%2Fresponser) [![Build Status](https://travis-ci.org/felipezarco/responser.svg?branch=master)](https://travis-ci.org/felipezarco/responser) [![Coverage Status](https://coveralls.io/repos/github/felipezarco/responser/badge.svg?branch=master)](https://coveralls.io/github/felipezarco/responser?branch=master) ![Downloads](https://img.shields.io/npm/dw/responser)
 
 [![npm](https://nodei.co/npm/responser.png)](https://www.npmjs.com/package/responser)
 
-## Installation
+## Simple Usage
 
-The latest version is available at: https://www.npmjs.com/package/responser
+#### Typescript
 
-Use your favorite package manager to install. For instance: 
-
-```
-  yarn add responser
-```
-
-Then import it:
-
-```javascript
+```typescript
 import responser from 'responser'
+import express, { Request, Response } from 'express'
+const app = express()
+const router = express.Router()
+app.use(responser)  // add responser middleware
+
+router.get('/hello', (req: Request, res: Response) => {
+  res.send_badRequest('Your request is wrong!')  // use responser methods
+})
+  
+app.use(router)
 ```
 
-Or, for commonjs:
+Above is equivalent to...
+
+```typescript
+import responser from 'responser'
+import express, { Request, Response } from 'express'
+const app = express()
+const router = express.Router()
+app.use(responser)  // add responser middleware
+
+router.get('/hello', (req: Request, res: Response) => {
+  res.status(400).json({
+    status: 'BAD_REQUEST',
+    code: 400,
+    message: 'Your request is wrong!',
+    success: false
+  })
+})
+  
+app.use(router)
+```
+
+#### Javacript version:
 
 ```javascript
-const responser = require('responser')
+const responser = require("responser").default
+const express = require("express")
+const app = express()
+const router = express.Router()
+
+app.use(responser)  // add responser middleware
+
+router.get('/hello', (req, res) => {
+  res.send_badRequest('Your request is wrong!') use responser methods
+})
+
+app.use(router)
+
 ```
 
-**Add responser as an express middleware**:
+## Properties
 
-```javascript
-app.use(responser)
-```
-
-And you're good to go!
+| property | description                | type    | example 1       | example 2|
+|----------|----------------------------|---------|-----------------|----------|
+| code     | HTTP Status Code           | number  | 200             | 400
+| status   | HTTP Status Name           | string  | OK              | BAD_REQUEST
+| success  | Success Flag               | boolean | true            | false
+| data     | Content when success=true  | any     | { myList: [] }  | -
+| errors   | Content when success=false | any     | - | [{ err1: "err1 text"}]
 
 ## Usage
 
-Since responser overwrites Express' interface, you can find the responser send_* methods directly in the express response.  
+All methods accept two parameters:  
 
-Methods accept two parameters:  
-
-* Required: message (string)
-* Optional: data || errors (any | undefiend)
-
-Consider the following code which has a `response` local variable (the name does not matter given its type is `Response`):
-
-```javascript
-import { Request, Response } from 'express'
-
-class PlanetController {
-
-  async index(request: Request, response: Response) {
-
-    const planets = [ 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune' ]
-
-    return response.send_ok('Planets were found successfully!', {
-      planets
-    })
-  }
-}
-
-export default new PlanetController()
+```typescript
+(message: string, content?: object | undefined) => void
 ```
 
-The above code generates the following response:
-
-```
-HTTP/1.1 200 OK
-X-Powered-By: Express
-Content-Type: application/json; charset=utf-8
-```
-```json
-{
-  "code": 200,
-  "status": "OK",
-  "message": "Planets were found successfully!",
-  "success": true,
-  "data": {
-    "planets": [
-       "Mercury",
-       "Venus",
-       "Earth",
-       "Mars",
-       "Jupiter",
-       "Saturn",
-       "Uranus",
-       "Neptune"
-     ]
-  }
-}
+**First parameter** (required):
+```typescript
+  message: string
 ```
 
-An example of unsuccessful response would be:
-
-```javascript
-import { Request, Response } from 'express'
-
-class PlanetController {
-
-  async post(request: Request, response: Response) {
-
-    const { planetName, planetSize } = request.body
-
-    let invalid = []
-
-    if(!planetName) invalid.push(
-      { name: 'planetName', message: 'The planet name was not given!' }
-    )
-
-    // ...
-
-    if(invalid.length) return response.send_badRequest(
-      'The request contains one or more errors!', invalid
-    )
-
-    // ...
-
-  }
-}
-
-export default new PlanetController()
+**Second parameter** (optional):
+```typescript
+  content?: object | undefined
 ```
 
-Which outputs:  
+The content given on second parameter:
 
-```javascript
-  {
-    status: 'BAD_REQUEST',
-    code: 400,
-    message: 'The request contains one or more errors!',
-    success: false,
-    errors: [
-      { name: 'planetName', message: 'The planet name was not given!' }
-    ]
-  }
-```
-
-Where:
-
-* `code` is a number HTTP Status Code;
-
-* `status` is a string with the name of the HTTP Status;
-
-* `success` is a boolean which is true for 1XX and 2XX HTTP Status Codes;
-
-* `data` **or** `errors` is the key name for given payload (responser second argument). It is `undefined` if none is given.
-
-**Note**: `data` is the key name when `success` is `true` while `errors` is the key when `success` is `false`.
+When `code` is `<300` (successful):
+- Property `success` will be `true`
+- Content given will be accessible as `data`
+  
+When `code` is `>=300` (unsuccessful):
+- Property `success` will be `false`
+- Content given will be accessible as `errors`
 
 ## Methods
 
- With typescript, you can easily access all methods by typing `.send_` in your response variable. The following methods are currently available (method, code and status).
+Responser overwrites Express interface.
+You can access the responser send_* methods directly.
+Access all methods by typing `.send_` in your `response` variable.
+
+The following methods are currently available (method, code and status).
 
 ```javascript
 send_continue                      100 // Continue
@@ -215,6 +170,88 @@ send_httpVersionNotSupported       505 // HTTP Version Not Supported
 send_insufficientStorage           507 // Insufficient Storage
 send_networkAuthenticationRequired 511 // Network Authentication Required
 ```
+
+### Controller example: Successful response
+
+```javascript
+import { Request, Response } from 'express'
+class PlanetController {
+  async index(request: Request, response: Response) {
+    const planets = ['Earth', 'Mars', 'Jupiter', 'Saturn']
+    return response.send_ok('Planets were found successfully!', {
+      planets
+    })
+  }
+}
+
+export default new PlanetController()
+```
+
+The above code generates the following response:
+
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+```
+```json
+{
+  "code": 200,
+  "status": "OK",
+  "message": "Planets were found successfully!",
+  "success": true,
+  "data": {
+    "planets": [
+       "Mercury",
+       "Venus",
+       "Earth",
+       "Mars",
+       "Jupiter",
+       "Saturn",
+       "Uranus",
+       "Neptune"
+     ]
+  }
+}
+```
+
+### Controller example: Unsuccessful response
+
+```javascript
+import { Request, Response } from 'express'
+
+class PlanetController {
+  async post(request: Request, response: Response) {
+    const { planetName, planetSize } = request.body
+    let invalid = []
+    if(!planetName) invalid.push(
+      { name: 'planetName', message: 'The planet name was not given!' }
+    )
+    if(invalid.length) return response.send_badRequest(
+      'The request contains one or more errors!', invalid
+    )
+  }
+}
+export default new PlanetController()
+```
+
+```
+HTTP/1.1 400 BAD REQUEST
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+```
+```json
+  {
+    "status": "BAD_REQUEST",
+    "code": 400,
+    "message": "The request contains one or more errors!",
+    "success": false,
+    "errors": [
+      { "name": "planetName", "message": "The planet name was not given!" }
+    ]
+  }
+```
+
 
 ## Testing
 
