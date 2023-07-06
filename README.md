@@ -22,7 +22,7 @@ const router = express.Router()
 app.use(responser)  // add responser middleware
 
 router.get('/hello', (req: Request, res: Response) => {
-  res.send_badRequest('Your request is wrong!')  // use responser methods
+  res.send_badRequest('Your request is wrong!')  // use responser
 })
   
 app.use(router)
@@ -31,11 +31,9 @@ app.use(router)
 Above is equivalent to...
 
 ```typescript
-import responser from 'responser'
 import express, { Request, Response } from 'express'
 const app = express()
 const router = express.Router()
-app.use(responser)  // add responser middleware
 
 router.get('/hello', (req: Request, res: Response) => {
   res.status(400).json({
@@ -60,7 +58,7 @@ const router = express.Router()
 app.use(responser)  // add responser middleware
 
 router.get('/hello', (req, res) => {
-  res.send_badRequest('Your request is wrong!') use responser methods
+  res.send_badRequest('Your request is wrong!') // use responser
 })
 
 app.use(router)
