@@ -1,10 +1,11 @@
 # Responser
 
-> A simple way to send standard HTTP responses in your Node/Express application.
+> Simplify HTTP Status Code response in express
 
+No need to remember which is the code for each HTTP status anymore!
+Responser provides a simple way to return standardized responses for each available HTTP status. It overwrites the express interface, making all methods accessible through your `response` or `res` variable. And that's it!
+ 
 ![vscode suggestions](https://raw.githubusercontent.com/felipezarco/files/master/images/screenshots/responser.png "Responser typescript methods suggestion")
-
-While creating an API, a programmer should not always be concerned about the HTTP status code nor about the response format. Responser gives you a simple way of returning standard responses for each HTTP status available.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![npm version](https://badge.fury.io/js/responser.svg)](https://badge.fury.io/js/felipezarco%2Fresponser) [![Build Status](https://travis-ci.org/felipezarco/responser.svg?branch=master)](https://travis-ci.org/felipezarco/responser) [![Coverage Status](https://coveralls.io/repos/github/felipezarco/responser/badge.svg?branch=master)](https://coveralls.io/github/felipezarco/responser?branch=master) ![Downloads](https://img.shields.io/npm/dw/responser)
 
@@ -12,23 +13,16 @@ While creating an API, a programmer should not always be concerned about the HTT
 
 ## Simple Usage
 
-#### Typescript
+### Install
 
-```typescript
-import responser from 'responser'
-import express, { Request, Response } from 'express'
-const app = express()
-const router = express.Router()
-app.use(responser)  // add responser middleware
-
-router.get('/hello', (req: Request, res: Response) => {
-  res.send_badRequest('Your request is wrong!')  // use responser
-})
-  
-app.use(router)
+Add responser with your favorite [package manager](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable):
+```shell
+  yarn add responser
 ```
 
-Above is equivalent to...
+### Typescript
+
+Express response **without** the use of `responser` package.
 
 ```typescript
 import express, { Request, Response } from 'express'
@@ -47,8 +41,25 @@ router.get('/hello', (req: Request, res: Response) => {
 app.use(router)
 ```
 
-#### Javacript version:
+Now same code **using** `responser`:
 
+```typescript
+import responser from 'responser'
+import express, { Request, Response } from 'express'
+const app = express()
+const router = express.Router()
+app.use(responser)  // add responser middleware
+
+router.get('/hello', (req: Request, res: Response) => {
+  res.send_badRequest('Your request is wrong!')  // use responser
+})
+  
+app.use(router)
+```
+As you can see from the example above, using `responser` makes code a bit cleaner and less error-prone.
+
+### Require (CommonJS) version:
+  
 ```javascript
 const responser = require("responser").default
 const express = require("express")
@@ -62,54 +73,38 @@ router.get('/hello', (req, res) => {
 })
 
 app.use(router)
-
 ```
 
-## Properties
+## Input Parameters
 
-| property | description                | type    | example 1       | example 2|
-|----------|----------------------------|---------|-----------------|----------|
+All `respose.send_*` methods accept two parameters:  
+```typescript
+(message: string, content?: any) => void
+```
+| parameter | description                                | type   | required |
+|-----------|--------------------------------------------|--------|----------|
+| message   | Human-readable message of your response    | string | yes      | 
+| content   | Anything you would like to return          |  any   | no       | 
+
+## Output Properties
+
+| property | description                | type    | example 1       | example 2              |
+|----------|----------------------------|---------|-----------------|------------------------|
 | code     | HTTP Status Code           | number  | 200             | 400
 | status   | HTTP Status Name           | string  | OK              | BAD_REQUEST
 | success  | Success Flag               | boolean | true            | false
 | data     | Content when success=true  | any     | { myList: [] }  | -
-| errors   | Content when success=false | any     | - | [{ err1: "err1 text"}]
+| errors   | Content when success=false | any     | -               | [{ err1: "err1 text"}]
 
-## Usage
-
-All methods accept two parameters:  
-
-```typescript
-(message: string, content?: object | undefined) => void
-```
-
-**First parameter** (required):
-```typescript
-  message: string
-```
-
-**Second parameter** (optional):
-```typescript
-  content?: object | undefined
-```
-
-The content given on second parameter:
-
-When `code` is `<300` (successful):
+When `code` is `<300` (✅ successful):
 - Property `success` will be `true`
-- Content given will be accessible as `data`
+- `content` given will be accessible as `data`
   
-When `code` is `>=300` (unsuccessful):
+When `code` is `>=300` (❌ unsuccessful):
 - Property `success` will be `false`
-- Content given will be accessible as `errors`
+- `content` given will be accessible as `errors`
 
-## Methods
-
-Responser overwrites Express interface.
-You can access the responser send_* methods directly.
-Access all methods by typing `.send_` in your `response` variable.
-
-The following methods are currently available (method, code and status).
+## List of Methods (method, code and status):
 
 ```javascript
 send_continue                      100 // Continue
@@ -172,17 +167,19 @@ send_networkAuthenticationRequired 511 // Network Authentication Required
 ### Controller example: Successful response
 
 ```javascript
-import { Request, Response } from 'express'
-class PlanetController {
-  async index(request: Request, response: Response) {
-    const planets = ['Earth', 'Mars', 'Jupiter', 'Saturn']
-    return response.send_ok('Planets were found successfully!', {
-      planets
-    })
-  }
-}
-
-export default new PlanetController()
+const express = require('express')
+const responser = require('responser').default
+const app = express()
+const router = express.Router()
+app.use(responser)
+router.get('/planets', (request, response, next) => {
+  const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+  response.send_ok('Planets were found successfully', { 
+    planets, 
+    planetsCount: planets.length 
+  })
+})
+app.use(router)
 ```
 
 The above code generates the following response:
@@ -208,7 +205,8 @@ Content-Type: application/json; charset=utf-8
        "Saturn",
        "Uranus",
        "Neptune"
-     ]
+     ],
+    "planetsCount": 8
   }
 }
 ```
@@ -216,23 +214,26 @@ Content-Type: application/json; charset=utf-8
 ### Controller example: Unsuccessful response
 
 ```javascript
-import { Request, Response } from 'express'
-
-class PlanetController {
-  async post(request: Request, response: Response) {
-    const { planetName, planetSize } = request.body
-    let invalid = []
-    if(!planetName) invalid.push(
-      { name: 'planetName', message: 'The planet name was not given!' }
-    )
-    if(invalid.length) return response.send_badRequest(
-      'The request contains one or more errors!', invalid
-    )
+const express = require('express')
+const responser = require('responser').default
+const app = express()
+const router = express.Router()
+app.use(responser)
+router.post('/planets', (request, response, next) => {
+  const { planetName, planetSize } = req.body
+  let myArrayOfErros = []
+  if(!planetName) {
+    myArrayOfErros.push({ 
+      name: 'planetName', 
+      message: 'Planet name was not given!' 
+    })
   }
-}
-export default new PlanetController()
+  if(myArrayOfErros.length) return response.send_badRequest(
+    'The request contains one or more errors!', myArrayOfErros
+  )
+})
+app.use(router)
 ```
-
 ```
 HTTP/1.1 400 BAD REQUEST
 X-Powered-By: Express
@@ -245,11 +246,12 @@ Content-Type: application/json; charset=utf-8
     "message": "The request contains one or more errors!",
     "success": false,
     "errors": [
-      { "name": "planetName", "message": "The planet name was not given!" }
+      { "name": "planetName", "message": "Planet name was not given!" }
     ]
   }
 ```
 
+Tip: if you would like a way to check all request variables automatically, consider using [request-check](https://www.npmjs.com/package/request-check). It will return an array of error messages for each field.
 
 ## Testing
 
