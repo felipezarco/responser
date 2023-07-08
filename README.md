@@ -65,11 +65,10 @@ const responser = require("responser").default
 const express = require("express")
 const app = express()
 const router = express.Router()
-
-app.use(responser)  
+app.use(responser)  // add responser middleware
 
 router.get('/hello', (req, res) => {
-  res.send_badRequest('Request is wrong!')
+  res.send_badRequest('Request is wrong!')  // use responser
 })
 
 app.use(router)
