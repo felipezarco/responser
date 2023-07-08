@@ -1,6 +1,6 @@
 # Responser
 
-> Simplify HTTP Status Code response in express
+> Simplify and format HTTP Status Code response in express
 
 No need to remember which is the code for each HTTP status anymore!
 Responser provides a simple way to return standardized responses for each available HTTP status. It overwrites the express interface, making all methods accessible through your `response` or `res` variable. And that's it!
@@ -33,7 +33,7 @@ router.get('/hello', (req: Request, res: Response) => {
   res.status(400).json({
     status: 'BAD_REQUEST',
     code: 400,
-    message: 'Your request is wrong!',
+    message: 'Request is wrong!',
     success: false
   })
 })
@@ -51,7 +51,7 @@ const router = express.Router()
 app.use(responser)  // add responser middleware
 
 router.get('/hello', (req: Request, res: Response) => {
-  res.send_badRequest('Your request is wrong!')  // use responser
+  res.send_badRequest('Request is wrong!')  // use responser
 })
   
 app.use(router)
@@ -66,10 +66,10 @@ const express = require("express")
 const app = express()
 const router = express.Router()
 
-app.use(responser)  // add responser middleware
+app.use(responser)  
 
 router.get('/hello', (req, res) => {
-  res.send_badRequest('Your request is wrong!') // use responser
+  res.send_badRequest('Request is wrong!')
 })
 
 app.use(router)
@@ -81,28 +81,32 @@ All `respose.send_*` methods accept two parameters:
 ```typescript
 (message: string, content?: any) => void
 ```
-| parameter | description                                | type   | required |
-|-----------|--------------------------------------------|--------|----------|
-| message   | Human-readable message of your response    | string | yes      | 
-| content   | Anything you would like to return          |  any   | no       | 
+| parameter | description                       | type   | required |
+|-----------|-----------------------------------|--------|----------|
+| message   | Human-readable message            | string | yes      | 
+| content   | Anything you would like to return |  any   | no       | 
 
 ## Output Properties
 
-| property | description                | type    | example 1       | example 2              |
-|----------|----------------------------|---------|-----------------|------------------------|
-| code     | HTTP Status Code           | number  | 200             | 400
-| status   | HTTP Status Name           | string  | OK              | BAD_REQUEST
-| success  | Success Flag               | boolean | true            | false
-| data     | Content when success=true  | any     | { myList: [] }  | -
-| errors   | Content when success=false | any     | -               | [{ err1: "err1 text"}]
+| property | description                | type    | e.g.1    | e.g.2              |
+|----------|----------------------------|---------|--------------|------------------------|
+| code     | HTTP Status Code           | number  | 200          | 400
+| status   | HTTP Status Name           | string  | OK           | BAD_REQUEST
+| success  | Success Flag               | boolean | true         | false
+| data     | content when success=true  | any     | { list: [] } | -
+| errors   | content when success=false | any     | -            | [{ err1: "err1 text"}]
 
-When `code` is `<300` (✅ successful):
+### Details
+
+For each responser method,
+
+When `code` is < 300 (✅ successful):
 - Property `success` will be `true`
-- `content` given will be accessible as `data`
+- `content` given will be accessible as property `data`
   
-When `code` is `>=300` (❌ unsuccessful):
+When `code` is >= 300 (❌ unsuccessful):
 - Property `success` will be `false`
-- `content` given will be accessible as `errors`
+- `content` given will be accessible as property `errors`
 
 ## List of Methods (method, code and status):
 
@@ -164,7 +168,7 @@ send_insufficientStorage           507 // Insufficient Storage
 send_networkAuthenticationRequired 511 // Network Authentication Required
 ```
 
-### Controller example: Successful response
+### Full example: Successful response
 
 ```javascript
 const express = require('express')
@@ -172,6 +176,7 @@ const responser = require('responser').default
 const app = express()
 const router = express.Router()
 app.use(responser)
+app.use(router)
 router.get('/planets', (request, response, next) => {
   const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
   response.send_ok('Planets were found successfully', { 
@@ -179,7 +184,8 @@ router.get('/planets', (request, response, next) => {
     planetsCount: planets.length 
   })
 })
-app.use(router)
+app.listen(3000, () => console.log('Server running on port 3000'))
+
 ```
 
 The above code generates the following response:
@@ -191,27 +197,27 @@ Content-Type: application/json; charset=utf-8
 ```
 ```json
 {
-  "code": 200,
   "status": "OK",
-  "message": "Planets were found successfully!",
+  "code": 200,
   "success": true,
+  "message": "Planets were found successfully",
   "data": {
     "planets": [
-       "Mercury",
-       "Venus",
-       "Earth",
-       "Mars",
-       "Jupiter",
-       "Saturn",
-       "Uranus",
-       "Neptune"
-     ],
+      "Mercury",
+      "Venus",
+      "Earth",
+      "Mars",
+      "Jupiter",
+      "Saturn",
+      "Uranus",
+      "Neptune"
+    ],
     "planetsCount": 8
   }
 }
 ```
 
-### Controller example: Unsuccessful response
+### Full example: Unsuccessful response
 
 ```javascript
 const express = require('express')
@@ -219,36 +225,39 @@ const responser = require('responser').default
 const app = express()
 const router = express.Router()
 app.use(responser)
+app.use(router)
 router.post('/planets', (request, response, next) => {
-  const { planetName, planetSize } = req.body
-  let myArrayOfErros = []
-  if(!planetName) {
-    myArrayOfErros.push({ 
-      name: 'planetName', 
-      message: 'Planet name was not given!' 
-    })
-  }
-  if(myArrayOfErros.length) return response.send_badRequest(
-    'The request contains one or more errors!', myArrayOfErros
+  const planetName = request.body?.name
+  let myErrors = []
+  if(!planetName) myErrors.push({ 
+    name: 'planetName', 
+    message: 'Planet name was not given!' 
+  })
+  if(myErrors.length) return response.send_badRequest(
+    'The request contains one or more errors!', myErrors
   )
 })
-app.use(router)
+app.listen(3000, () => console.log('Server running on port 3000'))
 ```
+Example response if planetName is not given on POST body.
 ```
 HTTP/1.1 400 BAD REQUEST
 X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
 ```
 ```json
-  {
-    "status": "BAD_REQUEST",
-    "code": 400,
-    "message": "The request contains one or more errors!",
-    "success": false,
-    "errors": [
-      { "name": "planetName", "message": "Planet name was not given!" }
-    ]
-  }
+{
+  "status": "BAD_REQUEST",
+  "code": 400,
+  "success": false,
+  "message": "The request contains one or more errors!",
+  "errors": [
+    {
+      "name": "planetName",
+      "message": "Planet name was not given!"
+    }
+  ]
+}
 ```
 
 Tip: if you would like a way to check all request variables automatically, consider using [request-check](https://www.npmjs.com/package/request-check). It will return an array of error messages for each field.

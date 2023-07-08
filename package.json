@@ -1,6 +1,6 @@
 {
   "name": "responser",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "Responses HTTP standard for REST",
   "main": "index.js",
   "types": "index",
