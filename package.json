@@ -1,7 +1,7 @@
 {
   "name": "responser",
   "version": "2.5.4",
-  "description": "Responses HTTP standard for REST",
+  "description": "Simplify and format HTTP Status Code responses in express",
   "main": "index.js",
   "types": "index",
   "scripts": {
@@ -16,20 +16,13 @@
     "LICENSE.md"
   ],
   "keywords": [
-    "responser",
-    "response",
-    "res",
-    "rest",
-    "api",
-    "json",
+    "format",
     "http",
+    "response",
     "status",
-    "codes",
-    "send",
+    "code",
     "express",
-    "data",
-    "content",
-    "payload"
+    "stantardized"
   ],
   "author": "Luiz Felipe Zarco <felipezarco@hotmail.com> (https://github.com/felipezarco)",
   "license": "MIT",

@@ -1,9 +1,9 @@
 # Responser
 
-> Simplify and format HTTP Status Code response in express
+> Simplify and format HTTP Status Code responses in express
 
 No need to remember which is the code for each HTTP status anymore!
-Responser provides a simple way to return standardized responses for each available HTTP status. It overwrites the express interface, making all methods accessible through your `response` or `res` variable. And that's it!
+Responser provides a simple way to return standardized responses for each available HTTP status. It overwrites the express interface, making all methods accessible through your `response` or `res` variable.
  
 ![vscode suggestions](https://raw.githubusercontent.com/felipezarco/files/master/images/screenshots/responser.png "Responser typescript methods suggestion")
 
@@ -22,12 +22,13 @@ Add responser with your favorite [package manager](https://classic.yarnpkg.com/l
 
 ### Typescript
 
-Express response **without** the use of `responser` package.
+Express response **without** the use of `responser`:
 
 ```typescript
 import express, { Request, Response } from 'express'
 const app = express()
 const router = express.Router()
+app.use(router)
 
 router.get('/hello', (req: Request, res: Response) => {
   res.status(400).json({
@@ -37,8 +38,6 @@ router.get('/hello', (req: Request, res: Response) => {
     success: false
   })
 })
-  
-app.use(router)
 ```
 
 Now same code **using** `responser`:
@@ -48,13 +47,12 @@ import responser from 'responser'
 import express, { Request, Response } from 'express'
 const app = express()
 const router = express.Router()
-app.use(responser)  // add responser middleware
+app.use(responser) // add responser middleware
+app.use(router)
 
 router.get('/hello', (req: Request, res: Response) => {
-  res.send_badRequest('Request is wrong!')  // use responser
+  res.send_badRequest('Request is wrong!')
 })
-  
-app.use(router)
 ```
 As you can see from the example above, using `responser` makes code a bit cleaner and less error-prone.
 
@@ -65,13 +63,12 @@ const responser = require("responser").default
 const express = require("express")
 const app = express()
 const router = express.Router()
-app.use(responser)  // add responser middleware
+app.use(responser) // add responser middleware
+app.use(router)
 
 router.get('/hello', (req, res) => {
-  res.send_badRequest('Request is wrong!')  // use responser
+  res.send_badRequest('Request is wrong!')
 })
-
-app.use(router)
 ```
 
 ## Input Parameters
@@ -92,8 +89,8 @@ All `respose.send_*` methods accept two parameters:
 | code     | HTTP Status Code           | number  | 200          | 400
 | status   | HTTP Status Name           | string  | OK           | BAD_REQUEST
 | success  | Success Flag               | boolean | true         | false
-| data     | content when success=true  | any     | { list: [] } | -
-| errors   | content when success=false | any     | -            | [{ err1: "err1 text"}]
+| data     | content if success=true  | any     | { items: [] } | -
+| errors   | content if success=false | any     | -            | [{ err: "err1 text"}]
 
 ### Details
 
@@ -187,7 +184,7 @@ app.listen(3000, () => console.log('Server running on port 3000'))
 
 ```
 
-The above code generates the following response:
+The route `/planets` generates the following response to a GET request:
 
 ```
 HTTP/1.1 200 OK
@@ -238,7 +235,7 @@ router.post('/planets', (request, response, next) => {
 })
 app.listen(3000, () => console.log('Server running on port 3000'))
 ```
-Example response if planetName is not given on POST body.
+Example response if planetName is not given on a POST request body.
 ```
 HTTP/1.1 400 BAD REQUEST
 X-Powered-By: Express
