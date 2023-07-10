@@ -1,7 +1,7 @@
 {
   "name": "responser",
-  "version": "2.5.5",
-  "description": "Simplify and format HTTP Status Code responses in express",
+  "version": "2.5.6",
+  "description": "Simplify, standardize and format HTTP Status Code responses in JSON with express",
   "main": "index.js",
   "types": "index",
   "scripts": {

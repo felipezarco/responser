@@ -1,6 +1,6 @@
 # Responser
 
-> Simplify and format HTTP Status Code responses in express
+> Simplify, standardize and format HTTP Status Code responses in JSON with express
 
 No need to remember which is the code for each HTTP status anymore!
 Responser provides a simple way to return standardized responses for each available HTTP status. It overwrites the express interface, making all methods accessible through your `response` or `res` variable.
