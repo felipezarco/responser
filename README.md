@@ -31,7 +31,7 @@ const router = express.Router()
 app.use(router)
 
 router.get('/hello', (req: Request, res: Response) => {
-  res.status(400).json({
+  return res.status(400).json({
     status: 'BAD_REQUEST',
     code: 400,
     message: 'Request is wrong!',
@@ -51,7 +51,7 @@ app.use(responser) // add responser middleware
 app.use(router)
 
 router.get('/hello', (req: Request, res: Response) => {
-  res.send_badRequest('Request is wrong!')
+  return res.send_badRequest('Request is wrong!')
 })
 ```
 As you can see from the example above, using `responser` makes code a bit cleaner and less error-prone.
@@ -67,7 +67,7 @@ app.use(responser) // add responser middleware
 app.use(router)
 
 router.get('/hello', (req, res) => {
-  res.send_badRequest('Request is wrong!')
+  return res.send_badRequest('Request is wrong!')
 })
 ```
 
@@ -173,9 +173,9 @@ const app = express()
 const router = express.Router()
 app.use(responser)
 app.use(router)
-router.get('/planets', (request, response, next) => {
+router.get('/planets', (req, res, next) => {
   const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
-  response.send_ok('Planets were found successfully', { 
+  return res.send_ok('Planets were found successfully', { 
     planets, 
     planetsCount: planets.length 
   })
@@ -222,14 +222,14 @@ const app = express()
 const router = express.Router()
 app.use(responser)
 app.use(router)
-router.post('/planets', (request, response, next) => {
-  const planetName = request.body?.name
+router.post('/planets', (req, res, next) => {
+  const planetName = req.body?.name
   let myErrors = []
   if(!planetName) myErrors.push({ 
     name: 'planetName', 
     message: 'Planet name was not given!' 
   })
-  if(myErrors.length) return response.send_badRequest(
+  if(myErrors.length) return res.send_badRequest(
     'The request contains one or more errors!', myErrors
   )
 })
