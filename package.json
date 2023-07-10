@@ -1,6 +1,6 @@
 {
   "name": "responser",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "description": "Simplify and format HTTP Status Code responses in express",
   "main": "index.js",
   "types": "index",
